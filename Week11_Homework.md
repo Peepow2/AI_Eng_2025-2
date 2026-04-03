@@ -86,3 +86,15 @@ plt.legend()
 
 plt.show()
 ```
+<hr>
+
+### TODO #8
+
+What makes the learning rate change?
+(hint: try to understand the scheduler [ReduceLROnPlateau](https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html))
+
+
+**Ans:** <br>
+ReduceLROnPlateau Scheduler ทำหน้าที่เป็นตัวปรับความเร็วในการเรียนรู้ของโมเดล โดยสังเกตค่า Validation Loss ในทุก ๆ Epoch หากพบว่าค่าความผิดพลาดหยุดลดลงหรือนิ่งอยู่ที่ระดับเดิม เป็นจำนวนรอบติดต่อกันตามที่ตั้งค่า patience ไว้ (ในที่นี้คือ 2 รอบ) ระบบจะถือว่าโมเดลไม่สามารถหาจุดที่แม่นยำกว่าเดิมได้ด้วยความเร็วปัจจุบัน Scheduler จึงลดค่า Learning Rate ลงตามสัดส่วนของ factor เพื่อบีบให้โมเดลค่อย ๆ ขยับ Weights ให้เข้าใกล้คำตอบที่ถูกต้องที่สุด
+<hr>
+
