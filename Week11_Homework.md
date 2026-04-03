@@ -32,3 +32,31 @@ Explain why the first linear layer has number of parameters = 15200
 **Ans:** <br>
 Parameters = Input x Output + Output(Bias) = (75 x 200) + 200 = 15,000 + 200 = 15,200
 <hr>
+### TODO#5
+
+Plot loss and val_loss as a function of epochs.
+```
+import matplotlib.pyplot as plt
+
+def plot_loss(train_losses, val_losses):
+    plt.figure(figsize=(10, 6))
+    
+    plt.plot(train_losses, label = 'Training Loss', color = 'blue', linestyle = 'solid')
+    plt.plot(val_losses, label = 'Validation Loss', color = 'red', linestyle = 'dashed')
+    
+    plt.title('Training and Validation Loss over Epochs')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss (MSE)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+plot_loss(train_losses, val_losses)
+```
+<hr>
+### TODO#6
+
+When does the model start to overfit?
+
+**Ans:** <br>
+เริ่ม Overfit เมื่อ Validation Loss เริ่มนิ่งหรือค่อยๆ ดีดตัวสูงขึ้น ในขณะที่ Training Loss ยังคงลดลง
