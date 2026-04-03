@@ -126,3 +126,36 @@ def evaluate(data_loader, model):
   mse = total_mse / num_batches
   return mse
 ```
+<hr>
+
+### TODO #10
+```python
+import torch
+import torch.nn as nn
+
+class FeedForwardDropoutNN(nn.Module):
+    def __init__(self, hidden_size, dropout_rate=0.2):
+        super(FeedForwardDropoutNN, self).__init__()
+        self.fc1 = nn.Linear(75, hidden_size)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(p=dropout_rate)
+        self.fc_final = nn.Linear(hidden_size, 1)
+
+    def forward(self, x):
+        x = preprocess_for_ff(x)
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.dropout(x)
+        out = self.fc_final(x)
+        return out
+```
+<hr>
+
+### TODO #11
+```python
+```
+
+### TODO #12
+
+Plot the losses and MSE of the training and validation as before. Evaluate the dropout model's performance
+<hr>
