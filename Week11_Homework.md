@@ -60,3 +60,4 @@ When does the model start to overfit?
 
 **Ans:** <br>
 เริ่ม Overfit เมื่อ Validation Loss เริ่มนิ่งหรือค่อยๆ ดีดตัวสูงขึ้น ในขณะที่ Training Loss ยังคงลดลง
+<hr>
