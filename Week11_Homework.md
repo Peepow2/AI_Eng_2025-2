@@ -42,20 +42,17 @@ Plot loss and val_loss as a function of epochs.
 ```python
 import matplotlib.pyplot as plt
 
-def plot_loss(train_losses, val_losses):
-    plt.figure(figsize=(10, 6))
-    
-    plt.plot(train_losses, label = 'Training Loss', color = 'blue', linestyle = 'solid')
-    plt.plot(val_losses, label = 'Validation Loss', color = 'red', linestyle = 'dashed')
-    
-    plt.title('Training and Validation Loss over Epochs')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss (MSE)')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+plt.figure(figsize=(10, 6))
 
-plot_loss(train_losses, val_losses)
+plt.plot(train_losses, label = 'Training Loss', color = 'blue', linestyle = 'solid')
+plt.plot(val_losses, label = 'Validation Loss', color = 'red', linestyle = 'dashed')
+
+plt.title('Training and Validation Loss over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Loss (MSE)')
+plt.legend()
+plt.grid(True)
+plt.show()
 ```
 <hr>
 
