@@ -98,3 +98,31 @@ What makes the learning rate change?
 ReduceLROnPlateau Scheduler ทำหน้าที่เป็นตัวปรับความเร็วในการเรียนรู้ของโมเดล โดยสังเกตค่า Validation Loss ในทุก ๆ Epoch หากพบว่าค่าความผิดพลาดหยุดลดลงหรือนิ่งอยู่ที่ระดับเดิม เป็นจำนวนรอบติดต่อกันตามที่ตั้งค่า patience ไว้ (ในที่นี้คือ 2 รอบ) ระบบจะถือว่าโมเดลไม่สามารถหาจุดที่แม่นยำกว่าเดิมได้ด้วยความเร็วปัจจุบัน Scheduler จึงลดค่า Learning Rate ลงตามสัดส่วนของ factor เพื่อบีบให้โมเดลค่อย ๆ ขยับ Weights ให้เข้าใกล้คำตอบที่ถูกต้องที่สุด
 <hr>
 
+### TODO #9
+```python
+import torch
+import torch.nn as nn
+
+def evaluate(data_loader, model):
+  # Evaluate model on validation data given by data_loader
+  model.eval()
+  criterion = nn.MSELoss()
+  total_mse = 0.0
+  num_batches = 0
+
+  device = next(model.parameters()).device
+
+  with torch.no_grad():
+      for inputs, targets in data_loader:
+          inputs = inputs.to(device)
+          targets = targets.to(device)
+          
+          outputs = model(inputs)
+          loss = criterion(outputs, targets)
+          
+          total_mse += loss.item()
+          num_batches += 1
+          
+  mse = total_mse / num_batches
+  return mse
+```
