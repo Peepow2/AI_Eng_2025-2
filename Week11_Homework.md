@@ -153,6 +153,62 @@ class FeedForwardDropoutNN(nn.Module):
 
 ### TODO #11
 ```python
+# Initialize Dropout Model
+model_dropout = FeedForwardDropoutNN(hidden_size=config['hidden_size'], dropout_rate=0.2)
+model_dropout = model_dropout.to(device)
+
+# Optimizer & Scheduler
+optimizer = torch.optim.Adam(model_dropout.parameters(), lr=config['lr'])
+scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+    optimizer, 
+    'min', 
+    factor=config['scheduler_factor'], 
+    patience=config['scheduler_patience'], 
+    min_lr=config['scheduler_min_lr']
+)
+
+# Loss Function
+loss_fn = nn.MSELoss()
+
+# Training Loop
+train_losses = []
+val_losses = []
+
+for epoch in range(config['epochs']):
+    # Training Phase
+    model_dropout.train()
+    train_loss = []
+    for inputs, y_true in train_loader:
+        inputs, y_true = inputs.to(device), y_true.to(device)
+        
+        optimizer.zero_grad()
+        y_pred = model_dropout(inputs)
+        loss = loss_fn(y_pred, y_true)
+        loss.backward()
+        optimizer.step()
+        
+        train_loss.append(loss.item())
+    
+    avg_train_loss = sum(train_loss) / len(train_loss)
+    train_losses.append(avg_train_loss)
+
+    # Validation Phase
+    model_dropout.eval()
+    val_loss = []
+    with torch.no_grad():
+        for inputs, y_true in val_loader:
+            inputs, y_true = inputs.to(device), y_true.to(device)
+            y_pred = model_dropout(inputs)
+            loss = loss_fn(y_pred, y_true)
+            val_loss.append(loss.item())
+            
+    avg_val_loss = sum(val_loss) / len(val_loss)
+    val_losses.append(avg_val_loss)
+    
+    # Update Learning Rate
+    scheduler.step(avg_val_loss)
+    
+    print(f"Epoch {epoch+1}: Train Loss: {avg_train_loss:.4f}, Val Loss: {avg_val_loss:.4f}")
 ```
 
 ### TODO #12
