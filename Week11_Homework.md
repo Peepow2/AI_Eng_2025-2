@@ -65,4 +65,17 @@ When does the model start to overfit?
 <hr>
 
 ```python
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+
+plt.plot(train_losses, label = 'Training Loss', color = 'blue', linestyle = 'solid')
+plt.plot(val_losses, label = 'Validation Loss', color = 'red', linestyle = 'dashed')
+
+plt.title('Training and Validation Loss over Epochs')
+plt.xlabel('Epochs')
+plt.ylabel('Loss (MSE)')
+plt.legend()
+plt.grid(True)
+plt.show()
 ```
