@@ -23,4 +23,11 @@ What is the activation function in the final dense layer? and why? Do you think 
 **Ans:** <br>
 ในโมเดล FeedForwardNN เลเยอร์สุดท้ายไม่มีการใส่ activation function <br>
 
+### TODO#4
+
+Explain why the first linear layer has number of parameters = 15200
+
+**Ans:** <br>
+Parameters = Input x Output + Output(Bias) = (75 x 200) + 200 = 15,000 + 200 = 15,200
+
 งาน Regression นี้เป้าหมายคือการพยากรณ์ค่าปริมาณน้ำฝน ซึ่งเป็นตัวเลขต่อเนื่อง การไม่ใส่ activation function ทำให้โมเดลสามารถ Output ค่าออกมาเป็นตัวเลขใด ๆ ก็ได้โดยไม่ถูกจำกัด และความสอดคล้องกับ Loss เมื่อเราใช้ MSE การรับค่าจาก Linear Layer โดยตรงจะทำให้การคำนวณ Gradient เพื่อปรับ weight ดีขึ้น โดยที่อาจจะมี function ที่ดีกว่า เช่น ReLU ที่ป้องกันไม่ให้โมเดลพยากรณ์ค่าติดลบ
