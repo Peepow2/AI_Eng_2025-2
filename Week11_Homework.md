@@ -64,18 +64,25 @@ When does the model start to overfit?
 เริ่ม Overfit เมื่อ Validation Loss เริ่มนิ่งหรือค่อยๆ ดีดตัวสูงขึ้น ในขณะที่ Training Loss ยังคงลดลง
 <hr>
 
+### TODO #7
+
+Plot the learning rate as a function of the epochs.
 ```python
 import matplotlib.pyplot as plt
 
-plt.figure(figsize=(10, 6))
+epochs = range(1, len(learning_rates) + 1)
 
-plt.plot(train_losses, label = 'Training Loss', color = 'blue', linestyle = 'solid')
-plt.plot(val_losses, label = 'Validation Loss', color = 'red', linestyle = 'dashed')
+plt.figure(figsize=(8, 5))
+plt.plot(epochs, learning_rates, marker='o', linestyle='-', color='green', label='Learning Rate')
 
-plt.title('Training and Validation Loss over Epochs')
+#plt.yscale('log')
+
+plt.title('Learning Rate Schedule over Epochs')
 plt.xlabel('Epochs')
-plt.ylabel('Loss (MSE)')
+plt.ylabel('Learning Rate (Log Scale)')
+plt.xticks(epochs)
+plt.grid(True, which = "both", ls = "-", alpha = 0.5)
 plt.legend()
-plt.grid(True)
+
 plt.show()
 ```
